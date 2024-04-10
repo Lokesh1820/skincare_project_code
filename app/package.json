@@ -1,0 +1,29 @@
+{
+  "name": "samp",
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@ionic/react-router": "^7.8.1",
+    "@react-navigation/native": "^6.1.9",
+    "@react-navigation/stack": "^6.3.20",
+    "expo": "~50.0.4",
+    "expo-camera": "~14.0.3",
+    "expo-image-picker": "~14.7.1",
+    "expo-status-bar": "~1.11.1",
+    "react": "18.2.0",
+    "react-native": "0.73.2",
+    "react-native-camera": "^4.2.1",
+    "react-native-ionicons": "^4.6.5",
+    "react-native-modal-datetime-picker": "^17.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0"
+  },
+  "private": true
+}

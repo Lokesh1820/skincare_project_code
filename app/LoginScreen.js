@@ -1,0 +1,134 @@
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+
+const LoginScreen = ({ navigation }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {
+    // Implement your authentication logic here
+    // For simplicity, let's just navigate back to the home screen for now
+    navigation.goBack();
+  };
+
+  const handleNewUserClick = () => {
+    // Navigate to the RegisterScreen when "New User?" is clicked
+    navigation.navigate('Register');
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.loginHeading}>Login</Text>
+      <Text style={styles.welcomeText}>Hello, welcome back</Text>
+      <Text style={styles.descriptionText}>Happy to see you again, please login here</Text>
+      
+      <View style={styles.inputContainer}>
+        <Text style={styles.inputLabel}>Username</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          onChangeText={(text) => setUsername(text)}
+        />
+      </View>
+      
+      <View style={styles.inputContainer}>
+        <Text style={styles.inputLabel1}>Password</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          secureTextEntry
+          onChangeText={(text) => setPassword(text)}
+        />
+      </View>
+
+      <TouchableOpacity style={styles.forgotPassword}>
+        <Text style={styles.forgotPasswordText}>Forgot password?</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+        <Text style={styles.loginButtonText}>Login</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.newUser} onPress={handleNewUserClick}>
+        <Text>New User?</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
+    backgroundColor: 'white',
+  },
+  loginHeading: {
+    fontSize: 24,
+    marginBottom: 16,
+    fontWeight: 'bold',
+    marginVertical: -80,
+  },
+  welcomeText: {
+    fontSize: 24,
+    marginBottom: 8,
+    marginRight:95 ,
+    color: 'darkslateblue',
+    fontWeight: 'bold',
+    marginVertical: 30,
+  },
+  descriptionText: {
+    fontSize: 16,
+    color: 'grey',
+    marginBottom: 16,
+    marginRight: 25,
+  },
+  inputContainer: {
+    marginBottom: 16,
+    width: '90%',
+  },
+  inputLabel: {
+    marginBottom: 4,
+    marginVertical: 30
+  },
+  inputLabel1: {
+    marginBottom: 4,
+  },
+
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    padding: 8,
+    width: '100%',
+    borderRadius: 5,
+  },
+  loginButton: {
+    backgroundColor: '#007BFF',
+    padding: 12,
+    borderRadius: 4,
+    width: '90%',
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  loginButtonText: {
+    color: '#fff',
+  },
+  forgotPassword: {
+    marginBottom: 10,
+  },
+  forgotPasswordText: {
+    color: '#007BFF',
+    textDecorationLine: 'underline',
+  },
+  newUser: {
+    alignItems: 'center',
+    padding: 12,
+    borderRadius: 4,
+    width: '90%',
+    backgroundColor: '#90ee90',
+  },
+});
+
+export default LoginScreen;
