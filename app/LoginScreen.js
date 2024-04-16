@@ -2,13 +2,35 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Implement your authentication logic here
-    // For simplicity, let's just navigate back to the home screen for now
-    navigation.goBack();
+    fetch('http://10.12.117.19:8080/PHP/login.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+        if (data === "Login successful") {
+          // If login is successful, navigate to the Home screen
+          navigation.navigate('Home');
+        } else {
+          // If login fails, display an error message
+          alert('Invalid email or password');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   };
 
   const handleNewUserClick = () => {
@@ -23,16 +45,17 @@ const LoginScreen = ({ navigation }) => {
       <Text style={styles.descriptionText}>Happy to see you again, please login here</Text>
       
       <View style={styles.inputContainer}>
-        <Text style={styles.inputLabel}>Username</Text>
+        <Text style={styles.inputLabel}>Email</Text>
         <TextInput
           style={styles.input}
-          placeholder="Username"
-          onChangeText={(text) => setUsername(text)}
+          placeholder="Email"
+          onChangeText={(text) => setEmail(text)}
+          keyboardType="email-address"
         />
       </View>
       
       <View style={styles.inputContainer}>
-        <Text style={styles.inputLabel1}>Password</Text>
+        <Text style={styles.inputLabel}>Password</Text>
         <TextInput
           style={styles.input}
           placeholder="Password"
@@ -92,10 +115,6 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     marginVertical: 30
   },
-  inputLabel1: {
-    marginBottom: 4,
-  },
-
   input: {
     height: 40,
     borderColor: 'gray',

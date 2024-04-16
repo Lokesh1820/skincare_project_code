@@ -7,11 +7,33 @@ const RegisterScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
 
   const handleRegister = () => {
-    // Implement your user registration logic here
-    // This could include making an API request to a server
-    // For simplicity, let's just navigate back to the home screen after registration
-    navigation.navigate('Home');
+    console.log('Username:', username);
+    console.log('Email:', email);
+    console.log('Password:', password);
+  
+    fetch('http://10.12.117.19:8080/PHP/register.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        email: email,
+        password: password,
+      }),
+    })
+    .then(response => response.text())
+    .then(data => {
+      console.log(data);
+      // If registration is successful, navigate to the Home screen
+      navigation.navigate('Home');
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   };
+  
 
   const handleAlreadyHaveAccountClick = () => {
     // Navigate back to the LoginScreen when "Already have an account? Login" is clicked
